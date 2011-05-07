@@ -8,7 +8,9 @@
      This file is part of the XSLT MathML Library distribution.
      See ./README or http://www.raleigh.ru/MathML/mmltex for
      copyright and other information
-     Modified by Fletcher T. Penney for MultiMarkdown Version 2.0.a   		-->
+     Modified by Fletcher T. Penney for MultiMarkdown Version 2.0.a
+            
+     Modified by Timothy Vismor for vismor.com                              -->
 <!-- ====================================================================== -->
 
 <!-- 3.3.2 mfrac -->
@@ -176,6 +178,14 @@
 </xsl:template>
 
 <xsl:template match="m:mstyle">
+	<!-- ===========================
+		 vismor 
+		 =========================== -->
+  	<xsl:if test="@mathvariant='bold'">
+		<xsl:text>\mathbf{</xsl:text>
+	</xsl:if>
+	<!-- =========================== -->
+
 	<xsl:if test="@displaystyle='true'">
 		<xsl:text>{\displaystyle </xsl:text>
 	</xsl:if>
@@ -202,6 +212,13 @@
 		<xsl:text>}{</xsl:text>
 	</xsl:if>
 	<xsl:apply-templates/>
+	<!-- ===========================
+		 vismor 
+		 =========================== -->
+  		<xsl:if test="@mathvariant='bold'">
+			<xsl:text>}</xsl:text>
+		</xsl:if>
+	<!-- =========================== -->
 	<xsl:if test="@color[not(@mathcolor)] or @mathcolor">
 		<xsl:text>}</xsl:text>
 	</xsl:if>
