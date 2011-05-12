@@ -1126,6 +1126,8 @@
 \usepackage[svgnames]{xcolor}   % Allow for color (annotations)
 \usepackage{fancyhdr}
 
+\usepackage{listings}           % Used to display algorithms
+
 \pagestyle{fancy}
 \headheight=14pt
 <!-- ===== vismor ===== -->
