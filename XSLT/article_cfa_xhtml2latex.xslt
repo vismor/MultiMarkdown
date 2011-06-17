@@ -61,8 +61,8 @@
 
 	<!-- ===== vismor ===== -->
 	<xsl:output method='text' encoding='utf-8' omit-xml-declaration = 'yes'/>
-	<!-- ===== vismor ===== -->
-
+	<!-- ================== -->
+	
 	<xsl:strip-space elements="*" />
 
 	<xsl:variable name="newline">
@@ -1218,6 +1218,15 @@
 
 \title{\mytitle}
 \author{\myauthor}
+
+<!-- ===== vismor ===== -->
+\renewcommand{\lstlistlistingname}{List of Algorithms}
+\renewcommand{\lstlistingname}{Algorithm}
+\lstset{
+language=C,
+mathescape=true
+}
+<!-- ================== -->
 
 \begin{document}
 </xsl:text>

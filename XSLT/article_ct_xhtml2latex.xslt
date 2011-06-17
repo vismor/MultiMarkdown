@@ -11,7 +11,7 @@
 <!--
 /======================================================================= 
 |	Minor modifications by Timothy Vismor
-|	May 2010
+|	May 2010, June 2011
 |=======================================================================
 |	
 |	This file generates an article (one-sided) with a table of contents
@@ -61,7 +61,7 @@
 
 	<!-- ===== vismor ===== -->
 	<xsl:output method='text' encoding='utf-8' omit-xml-declaration = 'yes'/>
-	<!-- ===== vismor ===== -->
+	<!-- ================== -->
 
 	<xsl:strip-space elements="*" />
 
@@ -108,12 +108,17 @@
 			</xsl:when>
 		<xsl:when test="translate(@name,'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 		'abcdefghijklmnopqrstuvwxyz') = 'date'">
+			<!-- ===== vismor ===== -->
+			<xsl:text>\date{\today</xsl:text>
+<!--
 			<xsl:text>\date{</xsl:text>
 			<xsl:call-template name="clean-text">
 				<xsl:with-param name="source">
 					<xsl:value-of select="@content"/>
 				</xsl:with-param>
 			</xsl:call-template>		
+-->
+			<!-- ================== -->
 			<xsl:text>}
 \def\mydate{</xsl:text>
 			<xsl:call-template name="clean-text">
@@ -1113,7 +1118,7 @@
 \defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
 \setmainfont{Adobe Garamond Pro}
 \setsansfont{Myriad Pro}
-\setmonofont{Menlo}
+\setmonofont{TeX Gyre Cursor Bold}
 
 \usepackage{xunicode}           % Xelatex support
 
@@ -1127,9 +1132,9 @@
 
 \pagestyle{fancy}
 \headheight=14pt
-<!-- ===== vismor ===== -->
+<!-- ================== -->
 
-\def\myauthor{Author}			% In case these were not included in metadata
+\def\myauthor{Author}           % In case these were not included in metadata
 \def\mytitle{Title}
 \def\mykeywords{}
 \def\mybibliostyle{plain}
@@ -1215,6 +1220,26 @@
 
 \title{\mytitle}
 \author{\myauthor}
+
+<!-- ===== vismor ===== -->
+% Alter some LaTeX defaults for better treatment of figures:
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+    \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+    \renewcommand{\bottomfraction}{0.6}	% 0.8 max fraction of floats at bottom
+    %   Parameters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.1}	% 0.07allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+<!-- ================== -->
 
 \begin{document}
 </xsl:text>
